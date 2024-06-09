@@ -42,6 +42,17 @@ export default function RootLayout() {
           name="(onboarding)/onboardingthree"
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="(auth)/signin"
+          options={{
+            headerShown: true,
+            title: "",
+            headerStyle: {
+              backgroundColor: "white",
+            },
+            headerShadowVisible: false,
+          }}
+        />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>

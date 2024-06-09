@@ -50,7 +50,7 @@ const OnboardingThree = () => {
             borderRadius: 16,
             paddingVertical: 18,
           }}
-          onPress={() => router.push("/(tabs)")}
+          onPress={() => router.push("/(auth)/signin")}
         >
           <ThemedText style={{ color: "white", fontWeight: "600" }}>
             Next
