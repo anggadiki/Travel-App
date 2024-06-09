@@ -17,7 +17,7 @@ const OnboardingThree = () => {
       />
       <View style={{ marginHorizontal: 33, marginTop: 40, gap: 20 }}>
         <ThemedText type="title" style={{ textAlign: "center" }}>
-          People don’t take trips, trips take
+          People don’t take trips, trips take{" "}
           <ThemedText type="title" style={{ color: "#FF7029" }}>
             people
           </ThemedText>
