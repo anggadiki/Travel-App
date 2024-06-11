@@ -1,6 +1,6 @@
-import { TextInput, TouchableOpacity, View } from "react-native";
+import { TextInput, View } from "react-native";
 import { ThemedText } from "../ThemedText";
-import { AntDesign } from "@expo/vector-icons";
+
 import {
   Circle,
   Defs,
@@ -9,6 +9,7 @@ import {
   Stop,
   Svg,
 } from "react-native-svg";
+import ButtonAuthGoogle from "../button/AuthGoogle";
 
 const SignInScreen = () => {
   return (
@@ -70,25 +71,7 @@ const SignInScreen = () => {
           Forgot Password ?
         </ThemedText>
       </View>
-      <TouchableOpacity
-        style={{
-          backgroundColor: "#24BAEC",
-          padding: 10,
-          alignItems: "center",
-          borderRadius: 16,
-          paddingVertical: 18,
-          width: "100%",
-          marginTop: 40,
-          flexDirection: "row",
-          justifyContent: "center",
-          gap: 8,
-        }}
-      >
-        <AntDesign name="google" size={24} color="white" />
-        <ThemedText style={{ color: "white", fontWeight: "600" }}>
-          Sign in with Google
-        </ThemedText>
-      </TouchableOpacity>
+      <ButtonAuthGoogle />
       <ThemedText style={{ marginTop: 40, color: "#7D848D", fontSize: 14 }}>
         Don’t have an account ?{" "}
         <ThemedText style={{ color: "#FF7029", fontSize: 14 }}>
