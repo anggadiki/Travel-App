@@ -1,10 +1,12 @@
-import { ThemedText } from "@/components/ThemedText";
-import { View } from "react-native";
+import HomeScreen from "@/components/HomeScreen";
+import { UserProvider } from "@/contexts/userContexts";
 
-export default function HomeScreen() {
+const App = () => {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <ThemedText>Welcome</ThemedText>
-    </View>
+    <UserProvider>
+      <HomeScreen />
+    </UserProvider>
   );
-}
+};
+
+export default App;

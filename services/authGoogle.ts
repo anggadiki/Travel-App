@@ -1,23 +1,37 @@
-import { AntDesign } from "@expo/vector-icons";
+// authGoogle.ts
 import {
   GoogleSignin,
   isErrorWithCode,
   statusCodes,
 } from "@react-native-google-signin/google-signin";
 import { router } from "expo-router";
-import { TouchableOpacity } from "react-native";
-import { ThemedText } from "../ThemedText";
 
-const AuthGoogle = async () => {
+export const authGoogle = async (setUser: any) => {
   GoogleSignin.configure({
-    scopes: ["https://www.googleapis.com/auth/drive.readonly"], // what API you want to access on behalf of the user, default is email and profile
+    scopes: ["https://www.googleapis.com/auth/drive.readonly"],
+    webClientId: process.env.SERVER_CLIENT_ID,
   });
+
   try {
     await GoogleSignin.hasPlayServices();
     const userInfo = await GoogleSignin.signIn();
     console.log("Google Sign-In Success:");
     console.log(JSON.stringify(userInfo, null, 2));
-    router.push("/(tabs)");
+
+    // Simpan data pengguna ke dalam UserContext
+    setUser({
+      id: userInfo.user.id,
+      name: userInfo.user.name,
+      email: userInfo.user.email,
+      photo: userInfo.user.photo,
+      familyName: userInfo.user.familyName,
+      givenName: userInfo.user.givenName,
+    });
+    console.log("User data saved:", userInfo.user);
+
+    router.push("/(tabs)"); // Navigasi setelah login berhasil
+
+    return true; // Berhasil sign-in
   } catch (error) {
     if (isErrorWithCode(error)) {
       switch (error.code) {
@@ -36,32 +50,6 @@ const AuthGoogle = async () => {
     } else {
       console.log("Non-Google Sign-In Error:", error);
     }
+    throw error; // Melempar error untuk ditangani di komponen yang memanggil
   }
 };
-
-const ButtonAuthGoogle = () => {
-  return (
-    <TouchableOpacity
-      style={{
-        backgroundColor: "#24BAEC",
-        padding: 10,
-        alignItems: "center",
-        borderRadius: 16,
-        paddingVertical: 18,
-        width: "100%",
-        marginTop: 40,
-        flexDirection: "row",
-        justifyContent: "center",
-        gap: 8,
-      }}
-      onPress={AuthGoogle}
-    >
-      <AntDesign name="google" size={24} color="white" />
-      <ThemedText style={{ color: "white", fontWeight: "600" }}>
-        Sign in with Google
-      </ThemedText>
-    </TouchableOpacity>
-  );
-};
-
-export default ButtonAuthGoogle;
