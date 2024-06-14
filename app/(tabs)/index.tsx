@@ -1,11 +1,11 @@
 import HomeScreen from "@/components/HomeScreen";
-import { UserProvider } from "@/contexts/userContexts";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const App = () => {
   return (
-    <UserProvider>
+    <GestureHandlerRootView>
       <HomeScreen />
-    </UserProvider>
+    </GestureHandlerRootView>
   );
 };
 

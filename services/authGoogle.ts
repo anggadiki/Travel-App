@@ -1,10 +1,11 @@
-// authGoogle.ts
+// src/services/authGoogle.ts
 import {
   GoogleSignin,
   isErrorWithCode,
   statusCodes,
 } from "@react-native-google-signin/google-signin";
 import { router } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const authGoogle = async (setUser: any) => {
   GoogleSignin.configure({
@@ -18,16 +19,17 @@ export const authGoogle = async (setUser: any) => {
     console.log("Google Sign-In Success:");
     console.log(JSON.stringify(userInfo, null, 2));
 
-    // Simpan data pengguna ke dalam UserContext
-    setUser({
+    // Simpan data pengguna ke AsyncStorage
+    const user = {
       id: userInfo.user.id,
       name: userInfo.user.name,
       email: userInfo.user.email,
       photo: userInfo.user.photo,
       familyName: userInfo.user.familyName,
       givenName: userInfo.user.givenName,
-    });
-    console.log("User data saved:", userInfo.user);
+    };
+    await AsyncStorage.setItem("user", JSON.stringify(user));
+    console.log("User data saved:", user);
 
     router.push("/(tabs)"); // Navigasi setelah login berhasil
 
