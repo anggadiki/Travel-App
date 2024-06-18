@@ -1,6 +1,9 @@
 import { Text, type TextProps, StyleSheet } from "react-native";
 
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { useFonts } from "expo-font";
+import { useCallback } from "react";
+import { SplashScreen } from "expo-router";
 
 export type ThemedTextProps = TextProps & {
   lightColor?: string;
@@ -16,9 +19,22 @@ export function ThemedText({
   ...rest
 }: ThemedTextProps) {
   const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
+  const [fontsLoaded, fontError] = useFonts({
+    "Sf-Ui-Display": require("@/assets/fonts/Sf-Ui-Display.otf"),
+  });
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded || fontError) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontError]);
+
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
 
   return (
     <Text
+      onLayout={onLayoutRootView}
       style={[
         { color },
         type === "default" ? styles.default : undefined,
@@ -37,6 +53,7 @@ const styles = StyleSheet.create({
   default: {
     fontSize: 16,
     lineHeight: 24,
+    fontFamily: "Sf-Ui-Display",
   },
   defaultSemiBold: {
     fontSize: 16,
@@ -44,7 +61,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   title: {
-    fontSize: 30,
+    fontSize: 38,
     fontWeight: "bold",
     lineHeight: 32,
   },

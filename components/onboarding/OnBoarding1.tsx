@@ -25,9 +25,12 @@ const OnBoardingOne = () => {
         />
       </View>
       <View style={{ marginHorizontal: 33, marginTop: 40, gap: 20 }}>
-        <ThemedText type="title" style={{ textAlign: "center" }}>
+        <ThemedText
+          type="title"
+          style={{ textAlign: "center", paddingTop: 10, lineHeight: 36 }}
+        >
           Life is short and the world is{" "}
-          <ThemedText type="title" style={{ color: "#FF7029" }}>
+          <ThemedText type="title" style={{ color: "#FF7029", lineHeight: 36 }}>
             wide
           </ThemedText>
         </ThemedText>
