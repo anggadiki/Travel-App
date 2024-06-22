@@ -1,8 +1,9 @@
 import React from "react";
-import { Image, View, Text, StyleSheet } from "react-native";
+import { Image, View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Path, Svg } from "react-native-svg";
 import { ThemedText } from "./ThemedText";
 import { EvilIcons } from "@expo/vector-icons";
+import { router } from "expo-router";
 interface CardProps {
   imageSource: any; // You can use more specific type if known (e.g., ImageSourcePropType)
   title: string;
@@ -15,9 +16,12 @@ const Card: React.FC<CardProps> = ({ imageSource, title, rating = 5 }) => {
       <View
         style={{ padding: 14, backgroundColor: "#FFFFFF", borderRadius: 24 }}
       >
-        <View style={styles.imageContainer}>
+        <TouchableOpacity
+          style={styles.imageContainer}
+          onPress={() => router.push("details")}
+        >
           <Image source={imageSource} style={styles.image} />
-        </View>
+        </TouchableOpacity>
         <View
           style={{
             flexDirection: "row",

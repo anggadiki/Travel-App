@@ -6,6 +6,7 @@ import { Path, Svg } from "react-native-svg";
 import { useFonts } from "expo-font";
 import { SplashScreen } from "expo-router";
 import Card from "./Card";
+import { ThemedView } from "./ThemedView";
 
 interface User {
   id: string;
@@ -71,10 +72,10 @@ const HomeScreen: React.FC = () => {
   );
 
   return (
-    <View
+    <ThemedView
       style={{
         flex: 1,
-        marginTop: 56,
+        paddingTop: 56,
         gap: 5,
       }}
       onLayout={onLayoutRootView}
@@ -201,7 +202,7 @@ const HomeScreen: React.FC = () => {
           showsHorizontalScrollIndicator={false}
         />
       </View>
-    </View>
+    </ThemedView>
   );
 };
 

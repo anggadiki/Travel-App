@@ -52,7 +52,6 @@ export function ThemedText({
 const styles = StyleSheet.create({
   default: {
     fontSize: 16,
-    lineHeight: 24,
     fontFamily: "Sf-Ui-Display",
   },
   defaultSemiBold: {
