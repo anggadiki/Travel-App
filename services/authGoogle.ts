@@ -4,10 +4,9 @@ import {
   isErrorWithCode,
   statusCodes,
 } from "@react-native-google-signin/google-signin";
-import { router } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const authGoogle = async (setUser: any) => {
+export const authGoogle = async () => {
   GoogleSignin.configure({
     scopes: ["https://www.googleapis.com/auth/drive.readonly"],
     webClientId: process.env.SERVER_CLIENT_ID,
@@ -31,9 +30,7 @@ export const authGoogle = async (setUser: any) => {
     await AsyncStorage.setItem("user", JSON.stringify(user));
     console.log("User data saved:", user);
 
-    router.push("/(tabs)"); // Navigasi setelah login berhasil
-
-    return true; // Berhasil sign-in
+    return user; // Mengembalikan objek pengguna setelah berhasil login
   } catch (error) {
     if (isErrorWithCode(error)) {
       switch (error.code) {

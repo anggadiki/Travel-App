@@ -1,20 +1,23 @@
+// components/ButtonAuthGoogle.tsx
 import React, { useState } from "react";
 import { TouchableOpacity, ActivityIndicator, Alert } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { ThemedText } from "../ThemedText";
 import { authGoogle } from "@/services/authGoogle";
-import { useUser } from "@/contexts/userContexts";
+import { router } from "expo-router";
 
 const ButtonAuthGoogle = () => {
-  const { setUser } = useUser();
   const [isLoading, setIsLoading] = useState(false);
 
   const handlePress = async () => {
     setIsLoading(true);
 
     try {
-      await authGoogle(setUser);
+      const user = await authGoogle();
       setIsLoading(false);
+      // Di sini Anda dapat melakukan navigasi atau pembaruan state lainnya setelah login berhasil
+      router.push("/(tabs)");
+      // Contoh: navigasi ke halaman berikutnya menggunakan router
     } catch (error) {
       setIsLoading(false);
       console.error("Error during Google Sign-In:", error);
